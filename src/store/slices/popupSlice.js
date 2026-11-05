@@ -1,0 +1,49 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+const popupSlice = createSlice({
+  name: "popup",
+  initialState: {
+    isAuthPopupOpen: false,
+    isSidebarOpen: false,
+    isSearchBarOpen: false,
+    isCartOpen: false,
+    isAIPopupOpen: false,
+  },
+  reducers: {
+    toggleAuthPopup: (state) => {
+      state.isAuthPopupOpen = !state.isAuthPopupOpen;
+    },
+    // Fix #17: Dedicated open action so the password-reset flow always opens
+    // the modal regardless of current state. Using toggleAuthPopup there was
+    // not idempotent — if the modal was already open it would close instead.
+    openAuthPopup: (state) => {
+      state.isAuthPopupOpen = true;
+    },
+    closeAuthPopup: (state) => {
+      state.isAuthPopupOpen = false;
+    },
+    toggleSidebar: (state) => {
+      state.isSidebarOpen = !state.isSidebarOpen;
+    },
+    toggleSearchBar: (state) => {
+      state.isSearchBarOpen = !state.isSearchBarOpen;
+    },
+    toggleCart: (state) => {
+      state.isCartOpen = !state.isCartOpen;
+    },
+    toggleAIModal: (state) => {
+      state.isAIPopupOpen = !state.isAIPopupOpen;
+    },
+  },
+});
+
+export const {
+  toggleAuthPopup,
+  openAuthPopup,
+  closeAuthPopup,
+  toggleSidebar,
+  toggleSearchBar,
+  toggleCart,
+  toggleAIModal,
+} = popupSlice.actions;
+export default popupSlice.reducer;
