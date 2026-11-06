@@ -135,7 +135,7 @@ const Footer = () => {
           </div>
           <div className="text-center sm:text-right">
             <p className="text-xs text-muted-foreground">© 2026 Daily Bazar. All rights reserved.</p>
-            <p className="text-xs text-muted-foreground/60 mt-0.5">Developed by CodeWithZeeshu</p>
+            <p className="text-xs text-muted-foreground/60 mt-0.5">Developed by Tanvir</p>
           </div>
         </div>
       </div>
