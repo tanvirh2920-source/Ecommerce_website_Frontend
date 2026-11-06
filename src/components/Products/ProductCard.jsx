@@ -1,15 +1,14 @@
 import React from "react";
 import { Star, ShoppingCart, Package } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart, syncAddToCart } from "../../store/slices/cartSlice";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/slices/cartSlice";
 import { toast } from "react-toastify";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
-  const { authUser } = useSelector((state) => state.auth);
 
-  const handleAddToCart = async (product, e) => {
+  const handleAddToCart = (product, e) => {
     e.preventDefault();
     e.stopPropagation();
     const normalizedProduct = {
@@ -18,20 +17,8 @@ const ProductCard = ({ product }) => {
       _id: product.id || product._id,
     };
 
-    if (authUser) {
-      const result = await dispatch(syncAddToCart({ productId: normalizedProduct.id, quantity: 1 }));
-      if (syncAddToCart.fulfilled.match(result)) {
-        toast.success(`${product.name} added to cart`);
-      }
-      // If server fails, fallback to local
-      if (syncAddToCart.rejected.match(result)) {
-        dispatch(addToCart({ product: normalizedProduct, quantity: 1 }));
-        toast.success(`${product.name} added to cart`);
-      }
-    } else {
-      dispatch(addToCart({ product: normalizedProduct, quantity: 1 }));
-      toast.success(`${product.name} added to cart`);
-    }
+    dispatch(addToCart({ product: normalizedProduct, quantity: 1 }));
+    toast.success(`${product.name} added to cart`);
   };
 
   return (

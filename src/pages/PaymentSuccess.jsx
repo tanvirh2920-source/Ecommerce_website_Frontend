@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { CheckCircle2, ShoppingBag, ArrowRight, Download, Loader, Truck } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMyOrders } from "../store/slices/orderSlice";
-import { clearCart, syncClearCart } from "../store/slices/cartSlice";
+import { clearCart } from "../store/slices/cartSlice";
 
 const PaymentSuccess = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,6 @@ const PaymentSuccess = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
     dispatch(clearCart());
-    dispatch(syncClearCart());
     dispatch(fetchMyOrders()).then(() => setInvoiceReady(true));
   }, [dispatch]);
 
